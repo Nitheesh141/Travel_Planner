@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #F0FDF4;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        #centering {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #heading {
+            text-align: center;
+            color: #22C55E;
+            margin: 20px 0;
+        }
+
+        #heading h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .box {
+            max-width: 400px;
+            height: auto;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #paid {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        #paid h4 {
+            color: #64748B;
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .amount {
+            font-size: 2rem;
+            color: #22C55E;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .transaction-info {
+            margin: 30px 0;
+            padding: 20px;
+            background: #F0FDF4;
+            border-radius: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #22C55E;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #F0FDF4;
+            color: #22C55E;
+        }
+
+        .success-animation {
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 480px) {
+            .box {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="box" class="box">
+        <div id="centering" class="success-animation">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="45" fill="#22C55E"/>
+                <path d="M30 50L45 65L70 35" stroke="white" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <div id="heading">
+            <h3>Payment Successful!</h3>
+        </div>
+
+        <div id="paid">
+            <h4>AMOUNT PAID</h4>
+            <div class="amount" id="amountPaid">$0.00</div>
+        </div>
+
+        <div class="transaction-info">
+            <div class="info-row">
+                <span>Transaction ID</span>
+                <span id="transactionId"></span>
+            </div>
+            <div class="info-row">
+                <span>Date & Time</span>
+                <span id="dateTime"></span>
+            </div>
+            <div class="info-row">
+                <span>Payment Method</span>
+                <span id="paymentMethod"></span>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="downloadReceipt()">Download Receipt</button>
+            <button class="btn btn-secondary" onclick="window.location.href='/'">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+       
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount') || '0';
+        
+        const paymentMethod = localStorage.getItem('paymentMethod') || 'Card Payment';
+        
+        
+        function generateTransactionId() {
+            return 'TXN' + Math.random().toString(36).substring(2, 10).toUpperCase();
+        }
+
+        function getCurrentDateTime() {
+            const now = new Date();
+            return now.toLocaleString('en-IN', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+        }
+
+    
+        function downloadReceipt() {
+            alert('Receipt download started...');
+        }
+
+        
+        document.getElementById('amountPaid').textContent = `$${amount}`;
+        document.getElementById('transactionId').textContent = generateTransactionId();
+        document.getElementById('dateTime').textContent = getCurrentDateTime();
+        document.getElementById('paymentMethod').textContent = paymentMethod;
+
+        localStorage.removeItem('paymentMethod');
+    </script>
+</body>
+</html>

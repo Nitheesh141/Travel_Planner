@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Banking</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #89f7fe,#66a6ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2980b9;
+            margin-bottom: 20px;
+        }
+
+        .amount-display {
+            font-size: 1.5em;
+            color: #2980b9;
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            width: 100%;
+            background: #2980b9;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1c5a82;
+        }
+
+        img {
+            width: 120px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./images/internet-banking-1.svg" alt="Net Banking Icon">
+        <h1>Net Banking</h1>
+        <div class="amount-display" id="amount-display"></div>
+        <form id="netBankingForm" onsubmit="submitPayment(event)">
+            <select required>
+                <option value="" disabled selected>Select Your Bank</option>
+                <option value="sbi">State Bank of India</option>
+                <option value="hdfc">HDFC Bank</option>
+                <option value="icici">ICICI Bank</option>
+                <option value="axis">Axis Bank</option>
+                <option value="pnb">Punjab National Bank</option>
+                <option value="bob">Bank of Baroda</option>
+                <option value="canara">Canara Bank</option>
+                <option value="kotak">Kotak Mahindra Bank</option>
+            </select>
+            <button type="submit">Proceed to Pay</button>
+        </form>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        
+        // Display amount
+        document.getElementById('amount-display').textContent = `Amount: ₹${amount}`;
+
+        function submitPayment(event) {
+            event.preventDefault();
+            localStorage.setItem('paymentMethod', 'Net Banking');
+            window.location.href = `paymentsuccessful.html?amount=${amount}`;
+        }
+    </script>
+</body>
+</html>

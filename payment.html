@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 50%;
+            margin: 30px auto;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods {
+            margin: 20px 0;
+        }
+
+        .method {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        .method:hover {
+            border-color: #007bff;
+            background-color: #eef6ff;
+        }
+
+        .method img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .method p {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .pay-now-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .pay-now-btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .method img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .method p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Payment Method</h1>
+        <div class="payment-methods">
+            <div class="method" onclick="selectPaymentMethod('credit-card.html')">
+                <img src="./images/mastercard.svg" alt="Credit/Debit Card">
+                <p>Credit/Debit Card</p>
+            </div>
+            <div class="method" onclick="selectPaymentMethod('upi.html')">
+                <img src="./images/upi-icon.svg" alt="UPI">
+                <p>UPI Payment</p>
+            </div>
+            <div class="method" onclick="selectPaymentMethod('net-banking.html')">
+                <img src="./images/internet-banking-1.svg" alt="Net Banking">
+                <p>Net Banking</p>
+            </div>
+            <div class="method" onclick="selectPaymentMethod('wallet.html')">
+                <img src="./images/paytm-icon.svg" alt="Wallets">
+                <p>Wallets (Paytm, PhonePe, etc.)</p>
+            </div>
+            <div class="method" onclick="selectPaymentMethod('paypal.html')">
+                <img src="./images/paypal.svg" alt="PayPal">
+                <p>PayPal</p>
+            </div>
+        </div>        
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+    
+        function selectPaymentMethod(page) {
+            window.location.href = `${page}?amount=${amount}`;
+        }
+    </script>
+</body>
+</html>

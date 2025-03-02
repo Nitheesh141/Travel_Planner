@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit/Debit Card Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ff9966, #ff5e62);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 30px auto;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .amount-display {
+            text-align: center;
+            font-size: 1.5em;
+            color: #ff5e62;
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ff5e62;
+            outline: none;
+        }
+
+        .card-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .card-row div {
+            flex: 1;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1.2em;
+            color: #fff;
+            background: #ff5e62;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #ff4448;
+            transform: translateY(-2px);
+        }
+
+        .card-icons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icons img {
+            height: 30px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Credit/Debit Card Payment</h1>
+        <div class="amount-display" id="amount-display"></div>
+        <div class="card-icons">
+            <img src="./images/visa.svg" alt="Visa">
+            <img src="./images/mastercard.svg" alt="Mastercard">
+            <img src="./images/rupay.svg" alt="RuPay">
+        </div>
+        <form id="cardPaymentForm" onsubmit="submitPayment(event)">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+
+            <label for="card-name">Card Holder Name</label>
+            <input type="text" id="card-name" placeholder="Enter card holder name" required>
+
+            <div class="card-row">
+                <div>
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                </div>
+                <div>
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" placeholder="***" maxlength="3" required>
+                </div>
+            </div>
+
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        
+        // Display amount
+        document.getElementById('amount-display').textContent = `Amount: ₹${amount}`;
+
+        // Format card number with spaces
+        document.getElementById('card-number').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = '';
+            for(let i = 0; i < value.length; i++) {
+                if(i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0,2) + '/' + value.slice(2);
+            }
+            e.target.value = value;
+        });
+
+        function submitPayment(event) {
+            event.preventDefault();
+            localStorage.setItem('paymentMethod', 'Credit/Debit Card');
+            window.location.href = `paymentsuccessful.html?amount=${amount}`;
+        }
+    </script>
+</body>
+</html>

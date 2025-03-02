@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Payment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #43cea2, #185a9d);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2e86c1;
+            margin-bottom: 20px;
+        }
+
+        .wallet-options img {
+            width: 80px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .wallet-options img:hover {
+            transform: scale(1.1);
+        }
+
+        button {
+            width: 100%;
+            background: #2e86c1;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1b4f72;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pay with Wallet</h1>
+        <div class="wallet-options">
+            <img src="./images/paytm-icon.svg" alt="Paytm">
+            <img src="./images/phonepe-icon.svg" alt="PhonePe">
+            <img src="./images/google-pay-icon.svg" alt="Google Pay">
+        </div>
+        <button onclick="submitPayment()">Pay Now</button>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+    
+        function submitPayment() {
+            localStorage.setItem('paymentMethod', 'Wallet Payment');
+            window.location.href = `paymentsuccessful.html?amount=${amount}`;
+        }
+    </script>
+</body>
+</html>
