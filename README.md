@@ -1,8 +1,8 @@
-# Navigate_Dreams
+# Travel planner
 ## Overview :
-The Navigate Dreams is an web application that allows the user to plan their trip, including itineraries, places to visit, accomodations and activities.
+The Travel planner is an web application that allows the user to plan their trip, including itineraries, places to visit, accomodations and activities.
 ## Project Objective :
-- The Navigate Dreams will include secure user authentication, allows account creation and management helps the users to create and manage trip itineraries with destinations and activities.
+- The Travel planner will include secure user authentication, allows account creation and management helps the users to create and manage trip itineraries with destinations and activities.
 - It also provides search features for exploring places and give suggestions for famous places and most visited places.
 - Users can save their favorite accommodations and share their trip with others.
 - Users can also comment down their queries and reviews on their saved itineraries.
